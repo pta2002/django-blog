@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body">
         {% autoescape off %}
-            {{ comment.body|markdown|linkify }}
+            {{ comment.body }}
         {% endautoescape %}
         {% if comment.comment_set.all %}
             {% for comment2 in comment.comment_set.all %}
