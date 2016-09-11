@@ -3,6 +3,15 @@
 	font-size: 1.2em;
 }
 
+.post-body h1,
+.post-body h2,
+.post-body h3,
+.post-body h4,
+.post-body h5,
+.post-body h6 {
+	font-family: sans-serif;
+}
+
 .draft-notice {
 	color: #ccc;
 	font-size: .7em;
