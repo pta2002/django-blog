@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Posts in {{ category.name }}{% endblock %}
+{% block content %}
+<h2>{{ totalposts }} post{{ totalposts|pluralize }} in {{ category.name }}{% if pages != 1 %} (page {{ page }} of {{ pages }}){% endif %}</h2>
+{% if posts %}
+	{% load blog_filters %}
+	{% for post in posts %}
+		<article class="post {% if not post.published %}draft{% endif %}">
+			<h2 class="post-title">
+				<div class="row">
+					<div class="col-sm-9">
+						<a href="{% url 'blog:viewpost' post.permalink %}">{{ post.post_title }}</a>
+					</div>
+				{% if not post.published %}
+					<div class="col-sm-3">
+						<span class="draft-notice">Draft</span>
+					</div>
+				{% endif %}
+				</div>
+			</h2>
+			<div class="post-body">
+				{% autoescape off %}
+					{{ post.post_body|markdown|truncatewords_html:500 }}
+				{% endautoescape %}
+			</div>
+		</article>
+	{% endfor %}
+	<div class="btn-group btn-group-justified">
+		{% if page < pages %}
+			<a href="{% url 'blog:categorypage' category.link page|add:"1" %}" class="btn btn-default">&laquo; Older</a>
+		{% else %}
+			<span class="btn btn-default disabled">&laquo; Older</span>
+		{% endif %}
+		{% if page > 1 %}
+			<a href="{% url 'blog:categorypage' category.link page|add:"-1" %}" class="btn btn-default">Newer &raquo;</a>
+		{% else %}
+			<span class="btn btn-default disabled">Newer &raquo;</span>
+		{% endif %}
+	</div>
+{% else %}
+	<p>No posts in this category!</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% if messages %}
+{% load blog_filters %}
+{% for message in messages %}
+	<div class="alert alert-dismissisble {% if message.tags %}alert-{{ message.tags|tobootstrap }}{% endif %}" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		{{ message }}
+	</div>
+{% endfor %}
+{% endif %}

@@ -1,0 +1,42 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Home{% endblock %}
+{% block content %}
+{% if posts %}
+	{% load blog_filters %}
+	{% for post in posts %}
+		<article class="post {% if not post.published %}draft{% endif %}">
+			<h2 class="post-title">
+				<div class="row">
+					<div class="col-sm-9">
+						<a href="{% url 'blog:viewpost' post.permalink %}">{{ post.post_title }}</a>
+					</div>
+				{% if not post.published %}
+					<div class="col-sm-3">
+						<span class="draft-notice">Draft</span>
+					</div>
+				{% endif %}
+				</div>
+			</h2>
+			<div class="post-body">
+				{% autoescape off %}
+					{{ post.post_body|markdown|truncatewords_html:500 }}
+					{% if post.post_body|word_count > 500 %}
+					<a href="{% url 'blog:viewpost' post.permalink %}" class="read-more">read more</a>
+					{% endif %}
+				{% endautoescape %}
+			</div>
+		</article>
+	{% endfor %}
+	<div class="btn-group btn-group-justified">
+		{% if pages > 1 %}
+			<a href="{% url 'blog:categorypage' "all" "2" %}" class="btn btn-default">&laquo; Older</a>
+		{% else %}
+			<span class="btn btn-default disabled">&laquo; Older</span>
+		{% endif %}
+		<span class="btn btn-default disabled">Newer &raquo;</span>
+	</div>
+{% else %}
+	<p>No posts yet!</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,17 @@
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a href="{% url 'blog:index' %}" class="navbar-brand">pta2002</a>
+		</div>
+
+		<ul class="nav navbar-nav navbar-right">
+			{% if request.user.is_authenticated %}
+			<li><a href="{% url 'blog:account' %}">Me ({{ user.username }})</a></li>
+			<li><a href="{% url 'blog:logout' %}?returnto={{ request.path|urlencode }}">Logout</a></li>
+			{% else %}
+			<li><a href="{% url 'blog:login' %}?returnto={{ request.path|urlencode }}">Login</a></li>
+			<li><a href="{% url 'blog:register' %}?returnto={{ request.path|urlencode }}">Register</a></li>
+			{% endif %}
+		</ul>
+	</div>
+</nav>
