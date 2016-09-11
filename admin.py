@@ -32,6 +32,7 @@ class CommentAdmin(admin.ModelAdmin):
 	search_fields = ['user', 'pub_date']
 
 	list_filter = ['pub_date']
+	inlines = [CommentInLine]
 
 	fieldsets = [
 		("Comment info", {'fields': (('body', 'user'), ('parent', 'reply_to'))}),
