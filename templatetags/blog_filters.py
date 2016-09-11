@@ -1,5 +1,5 @@
 from django import template
-import markdown2
+import markdown2, re
 
 register = template.Library()
 
@@ -19,3 +19,10 @@ def tobootstrap(value):
 		'info': 'info',
 		'success': 'success',
 	}[value.lower()]
+
+@register.filter(name='linkify')
+def linkify(value):
+    #TODO: Fix
+    regex = re.compile(r'(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*))')
+    #return regex.sub(r"<a href='\1' target='_blank'>\1</a>", value)
+    return value

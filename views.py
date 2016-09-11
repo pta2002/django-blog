@@ -7,7 +7,7 @@ from django.contrib.auth import logout, authenticate, login
 from django.conf import settings
 #from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Post, Category, UserExtra
+from .models import *
 
 import clef
 import math
@@ -99,21 +99,6 @@ def registerview(request):
 			else:
 				messages.add_message(request, messages.ERROR, "All fields are required")
 				return render(request, 'blog/register.html', context)
-
-def connectclef(request):
-	clef.initialize(app_id=getattr(settings, 'CLEF_APPID', ''), app_secret=getattr(settings, 'CLEF_APPSECRET', ''))
-	#TODO: CSRF Validation
-	code = request.GET['code']
-	try:
-		user_info = clef.get_login_information(code=code)
-	except:
-		#500
-		return HttpResponse('500 server error', status=500)
-
-	clef_id = user_info['id']
-	ue = UserExtra(clef_id=clef_id, user=request.user)
-	ue.save()
-	return redirect(reverse('blog:account'))
 	
 
 def logoutview(request):
@@ -159,3 +144,22 @@ def accountsettings(request):
 		messages.error(request, "You need to log in to view this page")
 		return redirect(reverse('blog:login') + '?returnto' + request.path)
 	return render(request, 'blog/account.html')
+
+def postcomment(request):
+	toreturn = {}
+	if request.method == "POST":
+		if request.user.is_authenticated():
+			if request.POST['comment-to-submit'] != "":
+				if 'reply-to' in request.POST:
+					comment = get_object_or_404(Comment, id=request.POST['reply-to'])
+					c = Comment(body=request.POST['comment-to-submit'], user=request.user, reply_to=comment)
+				elif 'parent' in request.POST:
+					parent = get_object_or_404(Post, id=request.POST['parent'])
+					c = Comment(body=request.POST['comment-to-submit'], user=request.user, parent=parent)
+				c.save()
+				messages.success(request, "Successfully commented!")
+			else:
+				messages.error(request, "Comment can't be empty!")
+		else:
+			messages.error(request, "You need to log in to comment!")
+		return redirect(request.META['HTTP_REFERER'])

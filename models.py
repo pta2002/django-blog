@@ -31,8 +31,19 @@ class Post(models.Model):
     			("view_drafts", "View anyone's drafts"),
     		)
 
-class UserExtra(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE)
-    clef_id = models.BigIntegerField(blank=True)
+
+class Comment(models.Model):
+    parent = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    reply_to = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
+    pub_date = models.DateTimeField('date published', default=timezone.now)
+    edit_date = models.DateTimeField('date editted', default=timezone.now)
+    body = models.TextField(blank=False)
+
+    def __str__(self):
+        return self.body[:100] + "..."
+
+    class Meta:
+        permissions = (
+            ("edit_comments", "Edit anyone's comments"),
+        )

@@ -17,8 +17,46 @@
 	<div class="post-body">
 		{% load blog_filters %}
 		{% autoescape off %}
-			{{ post.post_body|markdown }}
+			{{ post.post_body|markdown|linkify }}
 		{% endautoescape %}
+	</div>
+	<div class="post-comments">
+		<h2>Comments</h2>
+		{% if request.user.is_authenticated %}
+			<div class="panel">
+				<div class="panel-header">
+					Leave a comment
+				</div>
+				<div class="panel-body">
+					<form method="POST" action="{% url "blog:postcomment" %}" class="comment-form">
+		                {% csrf_token %}
+		                <input type="hidden" name="parent" value="{{ post.id }}">
+		                <div class="row">
+		                    <label for="comment">Comment</label>
+		                </div>
+		                <div class="row">
+		                    <textarea class="form-control comment-field" name="comment-to-submit" placeholder="Comment" id="comment-to-submit"></textarea>
+		                </div>
+		                <div class="row buttons">
+		                    <div class="col-sm-12">
+		                        <button class="btn btn-primary form-control submit" type="submit">Submit</button>
+		                    </div>
+		                </div>
+		            </form>
+				</div>
+			</div>
+        {% else %}
+            <a href="{% url 'blog:login' %}?returnto={{ request.path }}" onclick="reply({{comment.id}})">Login to reply</a>
+        {% endif %}
+		{% if post.comment_set.all %}
+			{% for comment in post.comment_set.all %}
+				{% with comment=comment template_name="blog/comments.html" %}
+					{% include template_name %}
+				{% endwith %}
+	        {% endfor %}
+		{% else %}
+			There are no comments :(
+		{% endif %}
 	</div>
 </article>
 {% endblock %}

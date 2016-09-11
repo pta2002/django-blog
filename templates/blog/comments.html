@@ -1,0 +1,43 @@
+{% load blog_filters %}
+<div class="panel panel-default comment" id="{{ comment.id }}">
+    <div class="panel-heading">
+        Posted by {{ comment.user }} on {{ comment.pub_date|date:"d/m/Y \a\t H:i" }}.
+    </div>
+    <div class="panel-body">
+        {% autoescape off %}
+            {{ comment.body|markdown|linkify }}
+        {% endautoescape %}
+        {% if comment.comment_set.all %}
+            {% for comment2 in comment.comment_set.all %}
+                {% with comment=comment2 template_name="blog/comments.html" %}
+                    {% include template_name %}
+                {% endwith %}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="panel-footer">
+        {% if request.user.is_authenticated %}
+            <a href="javascript:void();" class="reply" onclick="reply({{comment.id}})">Reply</a>
+            <form method="POST" action="{% url "blog:postcomment" %}" class="reply-form hidden">
+                {% csrf_token %}
+                <input type="hidden" name="reply-to" value="{{ comment.id }}">
+                <div class="row">
+                    <label for="comment">Comment</label>
+                </div>
+                <div class="row">
+                    <textarea class="form-control comment-field" name="comment-to-submit" placeholder="Comment" id="comment-to-submit"></textarea>
+                </div>
+                <div class="row buttons">
+                    <div class="col-sm-6">
+                        <button class="btn btn-primary form-control submit" type="submit">Submit</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button class="btn btn-default form-control" onclick="cancelreply({{comment.id}})">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        {% else %}
+            <a href="{% url 'blog:login' %}?returnto={{ request.path }}" onclick="reply({{comment.id}})">Login to reply</a>
+        {% endif %}
+    </div>
+</div>
