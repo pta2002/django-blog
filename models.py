@@ -33,9 +33,9 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    parent = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    parent = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    reply_to = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
+    reply_to = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
     pub_date = models.DateTimeField('date published', default=timezone.now)
     edit_date = models.DateTimeField('date editted', default=timezone.now)
     body = models.TextField(blank=False)
