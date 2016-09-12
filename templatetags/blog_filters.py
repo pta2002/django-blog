@@ -1,11 +1,11 @@
 from django import template
-import markdown2, re
+import markdown2, re, bleach
 
 register = template.Library()
 
 @register.filter(name='markdown')
-def markdown(value):
-	return markdown2.markdown(value, extras=['fenced-code-blocks'])
+def domarkdown(value, safe="escape"):
+	return markdown2.markdown(value, extras=['fenced-code-blocks'], safe_mode=safe)
 
 @register.filter(name='word_count')
 def word_count(value):

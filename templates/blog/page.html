@@ -1,6 +1,7 @@
 {% extends "blog/base.html" %}
 
 {% block title %}Page {{ page }}{% endblock %}
+{% block ogtitle %}Page {{ page }}{% endblock %}
 {% block content %}
 {% if posts %}
 	{% load blog_filters %}

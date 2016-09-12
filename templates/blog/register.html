@@ -1,5 +1,6 @@
 {% extends "blog/auth.html" %}
 {% block title %}Register{% endblock %}
+{% block ogtitle %}Register{% endblock %}
 {% block form %}
 <form action="{% url 'blog:register' %}" class="form-horizontal" method="post">
 	{% csrf_token %}

@@ -1,6 +1,7 @@
 {% extends "blog/base.html" %}
 
 {% block title %}Posts in {{ category.name }}{% endblock %}
+{% block ogtitle %}Posts in {{ category.name }}{% endblock %}
 {% block content %}
 <h2>{{ totalposts }} post{{ totalposts|pluralize }} in {{ category.name }}{% if pages != 1 %} (page {{ page }} of {{ pages }}){% endif %}</h2>
 {% if posts %}

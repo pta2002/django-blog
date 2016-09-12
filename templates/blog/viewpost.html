@@ -1,5 +1,9 @@
 {% extends "blog/base.html" %}
 {% block title %}{{ post.post_title }}{% endblock %}
+{% block og %}
+		<meta name="og:title" content="{{ post.title }} | pta2002">
+		<meta name="og:description" content="{{ post.post_body|truncatewords:50 }}">
+{% endblock %}
 {% block content %}
 <article class="post {% if not post.published %}draft{% endif %}">
 	<h2 class="post-title">
@@ -17,7 +21,7 @@
 	<div class="post-body">
 		{% load blog_filters %}
 		{% autoescape off %}
-			{{ post.post_body|markdown|linkify }}
+			{{ post.post_body|markdown:False|linkify }}
 		{% endautoescape %}
 	</div>
 	<div class="post-comments">
