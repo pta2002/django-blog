@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import reverse
 from django.utils import timezone
-from .models import Post, Category, Comment
+from .models import Post, Category, Comment, Page
 
 # Register your models here.
 def make_published(modeladmin, request, queryset):
@@ -61,6 +61,20 @@ class PostAdmin(admin.ModelAdmin):
 	def view_on_site(self, obj):
 		return reverse('blog:viewpost', kwargs={'permalink': obj.permalink})
 
+class PageAdmin(admin.ModelAdmin):
+	list_display = ['page_name', 'show']
+
+	search_fields = ['page_name']
+	list_filter = ['show']
+
+	fieldsets = [
+		("Page info", {'fields': [('page_name', 'permalink', 'show'), 'page_body']}),
+	]
+
+	def view_on_site(self, obj):
+		return reverse('blog:viewpage', kwargs={'permalink': obj.permalink})
+
 admin.site.register(Post, PostAdmin)
+admin.site.register(Page, PageAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Category)

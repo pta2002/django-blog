@@ -4,6 +4,13 @@
 			<a href="{% url 'blog:index' %}" class="navbar-brand">pta2002</a>
 		</div>
 
+		<ul class="nav navbar-nav navbar-left">
+			<li><a href="{% url 'blog:index' %}">Home</a></li>
+			{% for page in sitepages %}
+				<li><a href="{% url 'blog:viewpage' page.permalink %}">{{page.page_name}}</a></li>
+			{% endfor %}
+		</ul>
+
 		<ul class="nav navbar-nav navbar-right">
 			{% if request.user.is_authenticated %}
 			<li><a href="{% url 'blog:account' %}">Me ({{ user.username }})</a></li>
