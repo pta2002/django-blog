@@ -1,59 +1,118 @@
-.post-body {
-	font-family: serif;
-	font-size: 1.2em;
-}
-
-.post-body h1,
-.post-body h2,
-.post-body h3,
-.post-body h4,
-.post-body h5,
-.post-body h6 {
-	font-family: sans-serif;
-}
-
-.draft-notice {
-	color: #ccc;
-	font-size: .7em;
-}
-
-.blog-footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	height: 130px;
-	background: #eee;
-	padding: 1em 1.5em;
-	border-top: 1px solid #ccc;
-}
-
-.post-title, .widget-title {
-	border-bottom: 1px solid #eee;
-}
-
-.blog-title a {
-	color: #333;
-}
-
-html {
-	position: relative;
-	min-height: 100%;
-}
-
 body {
-	margin-bottom: 130px; /** Footer height **/
+	padding: 0;
+	margin: 0;
+
+	background: #fefefe;
+	font-family: "Ubuntu", sans-serif;
+	color: #444;
+
+	line-height: 1.6;
 }
 
-.comment-field {
-	width: 100%;
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	resize: vertical;
+*::-moz-selection {
+	color: rgba(255, 255, 255, 0.8);
+	background: #72DEF0;
 }
 
-.reply-form {
+*::-webkit-selection {
+	color: rgba(255, 255, 255, 0.8);
+	background: #72DEF0;
+}
+
+*::-ms-selection {
+	color: rgba(255, 255, 255, 0.8);
+	background: #72DEF0;
+}
+
+*::-o-selection {
+	color: rgba(255, 255, 255, 0.8);
+	background: #72DEF0;
+}
+
+*::selection {
+	color: rgba(255, 255, 255, 0.8);
+	background: #72DEF0;
+}
+
+.post-body {
+	font-size: 20px; 
+}
+
+/*.post-body > p:first-of-type::first-letter {
+	color: orange;
+	font-size: 3em;
+	float: left;
+	line-height: .8;
+	font-weight: bold;
+	margin: 0 6px 0 0;
+}*/
+
+.wrapper {
 	padding: 10px 15px;
+	max-width: 50em;
+	margin: 0 auto;
+}
+
+a {
+	color: #444;
+	font-weight: bold;
+	transition: 0.2s color;
+}
+
+a:hover {
+	color: #72DEF0;
+}
+
+pre {
+	display: inline-block;
+	overflow: scroll;
+	box-sizing: border-box;
+	width: 100%;
+	font-family: monospace;
+	font-size: 15px;
+}
+
+header .date {
+	color: #aaa;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 15px;
+	margin-bottom: -10px;
+}
+
+header h2 {
+	margin: 0;
+	text-transform: uppercase;
+	font-size: 2em;
+}
+
+ul.navlinks li {
+	display: inline-block;
+	margin: 0 30px 0 0;
+}
+
+ul.navlinks li a {
+	text-decoration: none;
+	color: #aaa;
+	transition: 0s;
+}
+
+ul.navlinks li a.current,
+ul.navlinks li a:hover {
+	color: #444;
+}
+
+.hidden {
+	display: none;
+}
+
+.navwrapper {
+	margin: 0 auto;
+	padding: 0 15px;
+	max-width: 50em;
+}
+
+.navlinks {
+	padding: 0;
 }
