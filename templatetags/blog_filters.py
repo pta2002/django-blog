@@ -1,6 +1,8 @@
 from django import template
+from django.conf import settings
+from django.utils.html import mark_safe
 from urllib.parse import urlparse
-import markdown2, re, bleach
+import markdown2, bleach
 
 register = template.Library()
 
@@ -45,3 +47,19 @@ def tobootstrap(value):
 @register.filter(name='linkify')
 def linkify(value):
     return bleach.linkify(value, callbacks=[external_links, handle_pytld], parse_email=True)
+
+@register.simple_tag
+def google_analytics():
+    trackingcode = getattr(settings, "GOOGLE_ANALYTICS_TRACKINGCODE", '')
+    if trackingcode == '':
+        return ''
+    return mark_safe("""<script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', '%s', 'auto');
+              ga('send', 'pageview');
+
+            </script>""" % trackingcode)

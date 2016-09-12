@@ -1,3 +1,4 @@
+{% load blog_filters %}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -45,5 +46,6 @@
 		<script src="{% static 'blog/js/jquery.min.js' %}"></script>
 		<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
 		<script src="{% static 'blog/js/app.js' %}"></script>
+		{% google_analytics %}
 	</body>
 </html>
