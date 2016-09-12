@@ -22,7 +22,4 @@ def tobootstrap(value):
 
 @register.filter(name='linkify')
 def linkify(value):
-    #TODO: Fix
-    regex = re.compile(r'(https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,4}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*))')
-    #return regex.sub(r"<a href='\1' target='_blank'>\1</a>", value)
-    return value
+    return bleach.linkify(value)
