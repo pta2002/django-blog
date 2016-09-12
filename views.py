@@ -29,6 +29,10 @@ def viewpost(request, permalink):
 	else:
 		raise Http404()
 
+def viewpage(request, permalink):
+	page = get_object_or_404(Page, permalink=permalink)
+	return render(request, 'blog/viewpage.html', {'page': page})
+
 def loginview(request):
 	context = {}
 	if request.user.is_authenticated():

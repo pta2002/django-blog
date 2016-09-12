@@ -1,8 +1,8 @@
 <nav class="navwrapper">
 	<ul class="navlinks">
-		<li class="navlink"><a href="#" class="current">Link 1</a></li>
-		<li class="navlink"><a href="#">Link 2</a></li>
-		<li class="navlink"><a href="#">Link 3</a></li>
-		<li class="navlink"><a href="#">Link 4</a></li>
+		<li class="navlink"><a href="{% url 'blog:index' %}">Home</a></li>
+		{% for page in sitepages %}
+		<li class="navlink"><a href="{% url 'blog:viewpage' page.permalink %}">{{page.page_name}}</a></li>
+		{% endfor %}
 	</ul>
 </nav>

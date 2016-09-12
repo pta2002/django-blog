@@ -31,6 +31,15 @@ class Post(models.Model):
     			("view_drafts", "View anyone's drafts"),
     		)
 
+class Page(models.Model):
+    page_name = models.CharField(max_length=200)
+    permalink = models.CharField(max_length=100, unique=True)
+    page_body = models.TextField('body')
+    show = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.page_name
+
 
 class Comment(models.Model):
     parent = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
