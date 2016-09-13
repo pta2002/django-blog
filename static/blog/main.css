@@ -11,27 +11,27 @@ body {
 
 *::-moz-selection {
 	color: rgba(255, 255, 255, 0.8);
-	background: #72DEF0;
+	background: #89ADB3;
 }
 
 *::-webkit-selection {
 	color: rgba(255, 255, 255, 0.8);
-	background: #72DEF0;
+	background: #89ADB3;
 }
 
 *::-ms-selection {
 	color: rgba(255, 255, 255, 0.8);
-	background: #72DEF0;
+	background: #89ADB3;
 }
 
 *::-o-selection {
 	color: rgba(255, 255, 255, 0.8);
-	background: #72DEF0;
+	background: #89ADB3;
 }
 
 *::selection {
 	color: rgba(255, 255, 255, 0.8);
-	background: #72DEF0;
+	background: #89ADB3;
 }
 
 .post-body {
@@ -66,7 +66,7 @@ a {
 }
 
 a:hover {
-	color: #72DEF0;
+	color: #89ADB3;
 }
 
 pre {
@@ -155,7 +155,7 @@ code {
 }
 
 .admonition.note {
-	border-left: 5px solid #72DEF0;
+	border-left: 5px solid #89ADB3;
 }
 
 .admonition.danger {
@@ -163,15 +163,15 @@ code {
 }
 
 .admonition.warning {
-	border-left: 5px solid #EDEA49;
+	border-left: 5px solid #BD442E;
 }
 
 .admonition.note .admonition-title {
-	color: #72DEF0;
+	color: #89ADB3;
 }
 
 .admonition.warning .admonition-title {
-	color: #EDEA49;
+	color: #BD442E;
 }
 
 .admonition.danger .admonition-title {
@@ -227,7 +227,7 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-	border-bottom: 1px solid #72DEF0;
+	border-bottom: 1px solid #89ADB3;
 }
 
 button[type="submit"] {
