@@ -8,7 +8,7 @@
 	<div class="post-full">
 		<article class="post">
 			<header>
-				<div class="date">{{ post.pub_date|date:"M j, Y"|upper }}</div>
+				<div class="date">{{ post.pub_date|date:"M j, Y"|upper }} {% if not post.published %} - Draft {% endif %}</div>
 				<h2><a href="{% url "blog:viewpost" post.permalink %}">{{ post.post_title }}</a></h2>
 			</header>
 			<div class="post-body">
@@ -22,4 +22,7 @@
 		</article>
 	</div>
 {% endfor %}
+<div class="browse-all">
+	<a href="{% url "blog:category" category="all" %}">Browse all posts</a>
+</div>
 {% endblock %}

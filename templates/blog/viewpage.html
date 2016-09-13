@@ -1,19 +1,12 @@
 {% extends "blog/base.html" %}
-{% block title %}{{ page.post_title }}{% endblock %}
+{% block title %}{{ page.page_name }}{% endblock %}
 {% block og %}
-        <meta name="og:title" content="{{ page.title }} | pta2002">
-        <meta name="og:description" content="{{ page.post_body|truncatewords:50 }}">
+        <meta name="og:title" content="{{ page.page_name }} | pta2002">
+        <meta name="og:description" content="{{ page.page_body|truncatewords:50 }}">
 {% endblock %}
 {% block content %}
 <article class="page">
-    <h2 class="page-title">
-        <div class="row">
-            <div class="col-sm-9">
-                {{ page.page_name }}
-            </div>
-        </div>
-    </h2>
-    <div class="post-body">
+    <div class="page-body">
         {% load blog_filters %}
         {% autoescape off %}
             {{ page.page_body|markdown:False|linkify }}

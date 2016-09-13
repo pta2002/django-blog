@@ -39,7 +39,7 @@ body {
 }
 
 /*.post-body > p:first-of-type::first-letter {
-	color: orange;
+	color: #72DEF0;
 	font-size: 3em;
 	float: left;
 	line-height: .8;
@@ -51,6 +51,12 @@ body {
 	padding: 10px 15px;
 	max-width: 50em;
 	margin: 0 auto;
+}
+
+.navwrapper {
+	margin: 0 auto;
+	padding: 0 15px;
+	max-width: 50em;
 }
 
 a {
@@ -107,12 +113,123 @@ ul.navlinks li a:hover {
 	display: none;
 }
 
-.navwrapper {
-	margin: 0 auto;
-	padding: 0 15px;
-	max-width: 50em;
-}
-
 .navlinks {
 	padding: 0;
+}
+
+ul {
+	padding-left: 20px;
+}
+
+blockquote {
+	color: #aaa;
+	font-style: italic;
+	border-left: 5px solid #aaa;
+	padding-left: 20px;
+	margin-left: 0;
+}
+
+blockquote em {
+	font-style: normal;
+} 
+
+blockquote a {
+	color: #aaa;
+}
+
+.page-body h1 {
+	font-size: 2.5em;
+	text-transform: uppercase;
+}
+
+code {
+	font-family: monospace;
+}
+
+.post {
+	margin-bottom: 20px;
+}
+
+.admonition {
+	padding-left: 20px;
+}
+
+.admonition.note {
+	border-left: 5px solid #72DEF0;
+}
+
+.admonition.danger {
+	border-left: 5px solid #D57526;
+}
+
+.admonition.warning {
+	border-left: 5px solid #EDEA49;
+}
+
+.admonition.note .admonition-title {
+	color: #72DEF0;
+}
+
+.admonition.warning .admonition-title {
+	color: #EDEA49;
+}
+
+.admonition.danger .admonition-title {
+	color: #D57526;
+}
+
+.admonition p {
+	margin-top: 0;
+}
+
+.admonition-title {
+	font-size: 1.1em;
+	font-weight: bold;
+	margin-bottom: 0;
+	text-transform: capitalize;
+}
+
+img {
+	max-width: 100%;
+}
+
+.browse-all,
+.older-newer {
+	font-size: 1.2em;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.older-newer span {
+	font-weight: bold;
+	text-decoration: underline;
+	color: #aaa;
+}
+
+html,body {
+	min-height: 100vh;
+}
+
+.center {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+input[type="text"],
+input[type="password"] {
+	border: 0;
+	border-bottom: 1px solid #444;
+	width: 100%;
+	margin-bottom: 5px;
+	transition: 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+	border-bottom: 1px solid #72DEF0;
+}
+
+button[type="submit"] {
+	width: 100%;
 }

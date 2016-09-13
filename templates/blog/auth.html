@@ -9,14 +9,14 @@
 		<meta name="og:description" content="Programing, game making and whatever">
 		{% endblock %}
 		{% load staticfiles %}
-		<link rel="stylesheet" href="{% static 'blog/bootstrap.min.css' %}">
-		<link rel="stylesheet" href="{% static 'blog/login.css' %}">
+		<link rel="stylesheet" href="{% static 'blog/main.css' %}">
 	</head>
 	<body class="center">
 		{% load blog_filters %}
-		{% block form %}
-		{% endblock %}
+		<div class="wrapper">
+			{% block form %}
+			{% endblock %}
+		</div>
 		<script src="{% static 'blog/js/jquery.min.js' %}"></script>
-		<script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
 	</body>
 </html>

@@ -1,8 +1,10 @@
 <nav class="navwrapper">
 	<ul class="navlinks">
-		<li class="navlink"><a href="{% url 'blog:index' %}">Home</a></li>
+		{% url 'blog:index' as index %}
+		<li class="navlink"><a href="{% url 'blog:index' %}" {% if request.path == index %} class="current"{% endif %}>Home</a></li>
 		{% for page in sitepages %}
-		<li class="navlink"><a href="{% url 'blog:viewpage' page.permalink %}">{{page.page_name}}</a></li>
+		{% url 'blog:viewpage' page.permalink as permalink%}
+		<li class="navlink"><a href="{{ permalink }}" {% if request.path == permalink %} class="current"{% endif %}>{{page.page_name}}</a></li>
 		{% endfor %}
 	</ul>
 </nav>

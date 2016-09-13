@@ -9,7 +9,7 @@
 <div class="post-full">
 	<article class="post">
 		<header>
-			<div class="date">{{ post.pub_date|date:"M j, Y"|upper }}</div>
+			<div class="date">{{ post.pub_date|date:"M j, Y"|upper }}{% if not post.published %} - Draft {% endif %}</div>
 			<h2>{{ post.post_title }}</h2>
 		</header>
 		<div class="post-body">

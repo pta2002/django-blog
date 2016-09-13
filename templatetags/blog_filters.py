@@ -2,7 +2,9 @@ from django import template
 from django.conf import settings
 from django.utils.html import mark_safe
 from urllib.parse import urlparse
-import markdown2, bleach
+import markdown, bleach
+
+from blog.models import Post, Page
 
 register = template.Library()
 
@@ -10,6 +12,15 @@ def external_links(attrs, new=False):
     o = urlparse(attrs['href'])
     if o.netloc != 'pta2002.com':
         attrs['target'] = '_blank'
+    return attrs
+
+
+def internal_links(attrs, new=False):
+    href = attrs['href']
+    if href.startswith('page:'):
+        attrs['href'] = reverse('blog:viewpage', href[5:])
+    elif href.startswith('post:'):
+        attrs['href'] = reverse('blog:viewpost', href[5:])
     return attrs
 
 
@@ -29,7 +40,10 @@ def handle_pytld(attrs, new=False):
 
 @register.filter(name='markdown')
 def domarkdown(value, safe="escape"):
-	return markdown2.markdown(value, extras=['fenced-code-blocks'], safe_mode=safe)
+    if not safe:
+        return markdown.markdown(value, extensions=['markdown.extensions.extra', 'markdown.extensions.admonition', 'markdown.extensions.codehilite'], safe_mode=safe)
+    else:
+        return markdown.markdown(value, extensions=['markdown.extensions.extra', 'markdown.extensions.codehilite'], safe_mode=safe)
 
 @register.filter(name='word_count')
 def word_count(value):
@@ -46,7 +60,7 @@ def tobootstrap(value):
 
 @register.filter(name='linkify')
 def linkify(value):
-    return bleach.linkify(value, callbacks=[external_links, handle_pytld], parse_email=True)
+    return bleach.linkify(value, callbacks=[external_links, handle_pytld, internal_links], parse_email=True)
 
 @register.simple_tag
 def google_analytics():

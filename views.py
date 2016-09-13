@@ -111,7 +111,7 @@ def logoutview(request):
 		messages.add_message(request, messages.SUCCESS, "Logged out.")
 	else:
 		messages.add_message(request, messages.ERROR, "You're not logged in!")
-	if request.GET['returnto']:
+	if 'returnto' in request.GET:
 		return redirect(request.GET['returnto'])
 	else:
 		return redirect(reverse('blog:index'))
