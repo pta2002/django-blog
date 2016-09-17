@@ -233,3 +233,7 @@ input[type="password"]:focus {
 button[type="submit"] {
 	width: 100%;
 }
+
+.emojione {
+	height: 1.3em;
+}

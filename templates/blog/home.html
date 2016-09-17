@@ -6,6 +6,7 @@
 {% block content %}
 {% for post in posts %}
 	<div class="post-full">
+		{% load emojione %}
 		<article class="post">
 			<header>
 				<div class="date">{{ post.pub_date|date:"M j, Y"|upper }} {% if not post.published %} - Draft {% endif %}</div>
@@ -13,7 +14,7 @@
 			</header>
 			<div class="post-body">
 				{% autoescape off %}
-				{{ post.post_body|markdown:False|linkify|truncatewords_html:500 }}
+				{% to_image post.post_body|markdown:False|linkify|truncatewords_html:500 %}
 				{% endautoescape %}
 			</div>
 			{% if post.post_body|markdown:False|linkify|wordcount > 500 %}

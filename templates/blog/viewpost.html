@@ -14,7 +14,8 @@
 		</header>
 		<div class="post-body">
 			{% autoescape off %}
-			{{ post.post_body|markdown:False|linkify }}
+			{% load emojione %}
+			{% to_image post.post_body|markdown:False|linkify %}
 			{% endautoescape %}
 		</div>
 	</article>
