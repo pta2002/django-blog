@@ -16,7 +16,7 @@
 			</header>
 			<div class="post-body">
 				{% autoescape off %}
-				{% load emoji_one %}
+				{% load emojione %}
 				{% to_image post.post_body|markdown:False|linkify|truncatewords_html:500 %}
 				{% endautoescape %}
 			</div>
