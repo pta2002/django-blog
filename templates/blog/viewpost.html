@@ -19,5 +19,8 @@
 			{% endautoescape %}
 		</div>
 	</article>
+	{% if post.published %}
+		{% disqus_comments 'https://pta2002.com/post/'|add:post.permalink post.permalink post.title %}
+	{% endif %}
 </div>
 {% endblock %}

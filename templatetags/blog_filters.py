@@ -37,6 +37,28 @@ def handle_pytld(attrs, new=False):
     # Everything checks out, keep going to the next callback.
     return attrs
 
+@register.simple_tag(name='disqus_comments')
+def disqus_comments(url, identifier, title):
+    disqus_shortname = getattr(settings, 'DISQUS_SHORTNAME', 'example')
+    return mark_safe("""<div id="disqus_thread"></div>
+<script>
+    
+    var disqus_config = function () {
+        this.page.url = "%s";
+        this.page.identifier = "%s";
+        this.page.title = "%s";
+    };
+    
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//%s.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>""" % (url, identifier, title, disqus_shortname))
 
 @register.filter(name='markdown')
 def domarkdown(value, safe="escape"):
