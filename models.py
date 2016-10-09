@@ -35,24 +35,14 @@ class Page(models.Model):
     page_name = models.CharField(max_length=200)
     permalink = models.CharField(max_length=100, unique=True)
     page_body = models.TextField('body')
-    show = models.BooleanField(default=True)
 
     def __str__(self):
         return self.page_name
 
-
-class Comment(models.Model):
-    parent = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    reply_to = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
-    pub_date = models.DateTimeField('date published', default=timezone.now)
-    edit_date = models.DateTimeField('date editted', default=timezone.now)
-    body = models.TextField(blank=False)
+class MenuLink(models.Model):
+    url = models.CharField(max_length=1024)
+    text = models.CharField(max_length=200)
+    order = models.IntegerField()
 
     def __str__(self):
-        return self.body[:100] + "..."
-
-    class Meta:
-        permissions = (
-            ("edit_comments", "Edit anyone's comments"),
-        )
+        return self.text

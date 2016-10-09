@@ -149,21 +149,3 @@ def accountsettings(request):
 		return redirect(reverse('blog:login') + '?returnto' + request.path)
 	return render(request, 'blog/account.html')
 
-def postcomment(request):
-	toreturn = {}
-	if request.method == "POST":
-		if request.user.is_authenticated():
-			if request.POST['comment-to-submit'] != "":
-				if 'reply-to' in request.POST:
-					comment = get_object_or_404(Comment, id=request.POST['reply-to'])
-					c = Comment(body=request.POST['comment-to-submit'], user=request.user, reply_to=comment)
-				elif 'parent' in request.POST:
-					parent = get_object_or_404(Post, id=request.POST['parent'])
-					c = Comment(body=request.POST['comment-to-submit'], user=request.user, parent=parent)
-				c.save()
-				messages.success(request, "Successfully commented!")
-			else:
-				messages.error(request, "Comment can't be empty!")
-		else:
-			messages.error(request, "You need to log in to comment!")
-		return redirect(request.META['HTTP_REFERER'])
