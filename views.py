@@ -148,4 +148,3 @@ def accountsettings(request):
 		messages.error(request, "You need to log in to view this page")
 		return redirect(reverse('blog:login') + '?returnto' + request.path)
 	return render(request, 'blog/account.html')
-
