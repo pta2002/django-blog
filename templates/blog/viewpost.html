@@ -19,8 +19,10 @@
 			{% endautoescape %}
 		</div>
 	</article>
-	{% if post.published %}
+	{% if post.comments %}
 		{% disqus_comments 'https://pta2002.com/post/'|add:post.permalink post.permalink post.title %}
+	{% else %}
+		Comments are disabled
 	{% endif %}
 </div>
 {% endblock %}

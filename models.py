@@ -22,6 +22,7 @@ class Post(models.Model):
     published = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1, blank=True)
     categories = models.ManyToManyField(Category, blank=True)
+    comments = models.BooleanField(default=True)
 
     def __str__(self):
     	return self.post_title
