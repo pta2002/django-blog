@@ -18,7 +18,7 @@ class PostAdmin(admin.ModelAdmin):
 	filter_horizontal = ['categories']
 
 	fieldsets = [
-		("Post info", {'fields': [('post_title', 'permalink', 'published'), 'post_body', 'author', 'categories']}),
+		("Post info", {'fields': [('post_title', 'permalink', 'published', 'comments'), 'post_body', 'author', 'categories']}),
 		(None, {'fields': ['pub_date',]})
 	]
 
