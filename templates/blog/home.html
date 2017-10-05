@@ -14,10 +14,10 @@
 			</header>
 			<div class="post-body">
 				{% autoescape off %}
-				{% to_image post.post_body|markdown:False|linkify|truncatewords_html:500 %}
+				{% to_image post.get_rendered|linkify|truncatewords_html:500 %}
 				{% endautoescape %}
 			</div>
-			{% if post.post_body|markdown:False|linkify|wordcount > 500 %}
+			{% if post.get_rendered|linkify|wordcount > 500 %}
 				<a href="{% url "blog:viewpost" post.permalink %}" class="readmore">Read more</a>
 			{% endif %}
 		</article>

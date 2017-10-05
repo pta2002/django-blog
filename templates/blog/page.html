@@ -21,7 +21,7 @@
 			</h2>
 			<div class="post-body">
 				{% autoescape off %}
-					{{ post.post_body|markdown|truncatewords_html:500 }}
+					{{ post.get_rendered|linkify|truncatewords_html:500 }}
 					{% if post.post_body|word_count > 500 %}
 					<a href="{% url 'blog:viewpost' post.permalink %}" class="read-more">read more</a>
 					{% endif %}

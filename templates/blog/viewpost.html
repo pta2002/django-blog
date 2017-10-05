@@ -15,7 +15,7 @@
 		<div class="post-body">
 			{% autoescape off %}
 			{% load emojione %}
-			{% to_image post.post_body|markdown:False|linkify %}
+			{% to_image post.get_rendered|linkify %}
 			{% endautoescape %}
 		</div>
 	</article>
